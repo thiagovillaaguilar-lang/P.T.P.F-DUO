@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piensa un toque, piensa en tu futuro</title>
+<style>
+  :root{
+    --ink:#1b1f23;
+    --paper:#f6f4ee;
+    --line:#d8d2c4;
+    --accent:#2f5d50;
+    --accent-soft:#e3ece9;
+    --warn:#a4432d;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height:1.6;
+  }
+  header{
+    padding:56px 24px 40px;
+    max-width:720px;
+    margin:0 auto;
+    display:flex;
+    gap:24px;
+    align-items:flex-start;
+  }
+  .mascot{
+    flex-shrink:0;
+    width:120px;
+    height:120px;
+    margin-top:0;
+  }
+  .header-text{ flex:1; }
+  .eyebrow{
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-size:13px;
+    color:var(--accent);
+    letter-spacing:0.02em;
+    margin-bottom:10px;
+  }
+  h1{
+    font-size:38px;
+    margin:0 0 18px;
+    line-height:1.2;
+    max-width:16ch;
+  }
+  .lead{
+    font-size:18px;
+    max-width:62ch;
+    color:#3a3f44;
+  }
+  @media (max-width: 520px){
+    header{ flex-direction:column; }
+    .mascot{ width:90px; height:90px; }
+  }
+  main{
+    max-width:720px;
+    margin:0 auto;
+    padding:0 24px 80px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:32px;
+    margin-top:28px;
+  }
+  .card h2{
+    font-family:-apple-system, Helvetica, Arial, sans-serif;
+    font-size:15px;
+    text-transform:none;
+    margin:0 0 14px;
+    color:var(--ink);
+  }
+  ul.features{
+    padding-left:20px;
+    margin:0;
+  }
+  ul.features li{ margin-bottom:8px; }
+
+  .terms-toggle{
+    font-family:-apple-system, Helvetica, Arial, sans-serif;
+    font-size:14px;
+    color:var(--accent);
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:0;
+    text-decoration:underline;
+  }
+  .terms-body{
+    display:none;
+    margin-top:18px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    font-size:15px;
+    color:#3a3f44;
+  }
+  .terms-body.open{ display:block; }
+  .terms-body h3{
+    font-family:-apple-system, Helvetica, Arial, sans-serif;
+    font-size:14px;
+    margin:18px 0 6px;
+  }
+  .terms-body h3:first-child{ margin-top:0; }
+
+  .agree-row{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    margin-top:24px;
+    font-family:-apple-system, Helvetica, Arial, sans-serif;
+    font-size:14px;
+  }
+  .agree-row input{
+    width:18px;
+    height:18px;
+    margin-top:2px;
+    accent-color: var(--accent);
+    cursor:pointer;
+  }
+  .agree-row label{ cursor:pointer; }
+
+  .download-btn{
+    display:inline-block;
+    margin-top:20px;
+    font-family:-apple-system, Helvetica, Arial, sans-serif;
+    font-size:16px;
+    font-weight:600;
+    padding:14px 28px;
+    border-radius:4px;
+    border:none;
+    background:var(--accent);
+    color:#fff;
+    cursor:pointer;
+    opacity:0.4;
+    pointer-events:none;
+    transition: opacity 0.2s ease;
+  }
+  .download-btn.enabled{
+    opacity:1;
+    pointer-events:auto;
+  }
+  .download-btn.enabled:hover{
+    background:#274d43;
+  }
+  .hint{
+    font-family:-apple-system, Helvetica, Arial, sans-serif;
+    font-size:13px;
+    color:#8a8478;
+    margin-top:8px;
+  }
+
+  .status{
+    font-family:-apple-system, Helvetica, Arial, sans-serif;
+    font-size:14px;
+    margin-top:14px;
+    padding:12px 14px;
+    border-radius:4px;
+    background:var(--accent-soft);
+    color:var(--accent);
+    display:none;
+  }
+  .status.show{ display:block; }
+
+  footer{
+    max-width:720px;
+    margin:0 auto;
+    padding:0 24px 60px;
+    font-family:-apple-system, Helvetica, Arial, sans-serif;
+    font-size:13px;
+    color:#8a8478;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="mascot" viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+    <!-- tail wrapping around body -->
+    <path d="M96 110 Q120 104 116 78 Q114 62 98 62 Q106 78 92 92" fill="none" stroke="#2f5d50" stroke-width="10" stroke-linecap="round"/>
+    <!-- body, sitting -->
+    <ellipse cx="65" cy="106" rx="34" ry="22" fill="#2f5d50"/>
+    <!-- chest patch -->
+    <ellipse cx="65" cy="108" rx="15" ry="18" fill="#f6f4ee"/>
+    <!-- front paws -->
+    <ellipse cx="50" cy="122" rx="8" ry="6.5" fill="#2f5d50"/>
+    <ellipse cx="80" cy="122" rx="8" ry="6.5" fill="#2f5d50"/>
+    <ellipse cx="50" cy="123" rx="5" ry="4" fill="#f6f4ee"/>
+    <ellipse cx="80" cy="123" rx="5" ry="4" fill="#f6f4ee"/>
+    <!-- ears (outer) -->
+    <path d="M28 46 L20 12 L48 38 Z" fill="#2f5d50"/>
+    <path d="M102 46 L110 12 L82 38 Z" fill="#2f5d50"/>
+    <!-- ears (inner) -->
+    <path d="M32 40 L27 20 L42 36 Z" fill="#d9827a"/>
+    <path d="M98 40 L103 20 L88 36 Z" fill="#d9827a"/>
+    <!-- head -->
+    <circle cx="65" cy="62" r="40" fill="#2f5d50"/>
+    <!-- cheeks / muzzle patch -->
+    <ellipse cx="65" cy="72" rx="22" ry="16" fill="#f6f4ee"/>
+    <!-- stripes on forehead -->
+    <path d="M55 26 L57 38 M65 22 L65 35 M75 26 L73 38" stroke="#274d43" stroke-width="2.4" stroke-linecap="round"/>
+    <!-- stripes on cheeks -->
+    <path d="M26 46 L38 50 M104 46 L92 50 M22 60 L36 61 M108 60 L94 61" stroke="#274d43" stroke-width="2.6" stroke-linecap="round"/>
+    <!-- eyes: closed, content/thoughtful curve -->
+    <path d="M45 58 Q51 52 58 58" stroke="#1b1f23" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M72 58 Q79 52 85 58" stroke="#1b1f23" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- blush -->
+    <ellipse cx="45" cy="67" rx="5.5" ry="3.5" fill="#d9827a" opacity="0.55"/>
+    <ellipse cx="85" cy="67" rx="5.5" ry="3.5" fill="#d9827a" opacity="0.55"/>
+    <!-- nose -->
+    <path d="M60 68 L70 68 L65 74" fill="#a4432d"/>
+    <!-- mouth -->
+    <path d="M65 74 L65 78" stroke="#1b1f23" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M65 78 Q60 83 54 80" stroke="#1b1f23" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <path d="M65 78 Q70 83 76 80" stroke="#1b1f23" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <!-- whiskers -->
+    <path d="M16 64 L36 67 M16 73 L36 71 M16 82 L36 76" stroke="#2f5d50" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M114 64 L94 67 M114 73 L94 71 M114 82 L94 76" stroke="#2f5d50" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>
+  <div class="header-text">
+    <div class="eyebrow">Proyecto escolar · Extensión de navegador</div>
+    <h1>Piensa un toque, piensa en tu futuro</h1>
+    <p class="lead">Una extensión que detecta lenguaje ofensivo o discriminatorio mientras escribes en redes sociales, y te muestra una advertencia breve antes de que publiques.</p>
+  </div>
+</header>
+
+<main>
+
+  <div class="card">
+    <h2>Sobre esta extensión</h2>
+    <p style="margin-top:0;">La gran mayoría de adolescentes y adultos jóvenes, no piensa antes de enviar un mensaje o comentario, o postear una publicación o historia. Tristemente, no muchos son conscientes de que el contenido que subimos nunca se borra, ni en las mentes de los afectados, ni en la red social, y el lenguaje ofensivo, discriminatorio o inapropiado, puede algún día ser juzgado y malinterpretado por oficiales de admisión o recursos humanos y cerrarnos las puertas a universidades y trabajos.</p>
+    <p>Esta extensión cuenta con el propósito de darte 10 segundos para pensar antes del envió de contenido que, sin darnos cuenta, puede ser ofensivo, discriminatorio o inapropiado. No bloquea ni borra nada, te da un momento para pensar, con la adición de una historia o dato REAL sobre el impacto de este tipo de lenguaje.</p>
+  </div>
+
+  <div class="card">
+    <h2>Qué hace</h2>
+    <ul class="features">
+      <li>Analiza el texto mientras lo escribes en publicaciones, historias o mensajes.</li>
+      <li>Si detecta contenido ofensivo o discriminatorio, muestra un aviso durante 10 segundos.</li>
+      <li>El aviso incluye un dato o historia corta sobre el impacto real de ese tipo de lenguaje.</li>
+      <li>No bloquea ni borra nada — solo te da un momento para pensarlo.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Descargar</h2>
+    <p style="margin-top:0;">Archivo comprimido (.zip) para instalar manualmente en modo desarrollador.</p>
+
+    <button class="terms-toggle" id="toggleTerms" type="button">Leer términos y condiciones</button>
+
+    <div class="terms-body" id="termsBody">
+      <h3>1. Uso del software</h3>
+      <p>Esta extensión es un proyecto académico, distribuido sin garantía, para fines educativos y de demostración.</p>
+
+      <h3>2. Datos y privacidad</h3>
+      <p>El texto analizado se procesa localmente en tu navegador y no se almacena ni se envía a servidores externos.</p>
+
+      <h3>3. Responsabilidad</h3>
+      <p>El autor no se hace responsable por el contenido que publiques ni por decisiones tomadas a partir de las advertencias mostradas.</p>
+
+      <h3>4. Modificación y distribución</h3>
+      <p>Puedes usar este código con fines de aprendizaje. No está permitido su uso comercial sin autorización del autor.</p>
+    </div>
+
+    <div class="agree-row">
+      <input type="checkbox" id="agreeCheck">
+      <label for="agreeCheck">He leído y acepto los términos y condiciones</label>
+    </div>
+
+    <div>
+      <button class="download-btn" id="downloadBtn" type="button">Descargar extensión (.zip)</button>
+    </div>
+    <div class="hint">El botón se activa al marcar la casilla de arriba.</div>
+
+    <div class="status" id="statusMsg">Descarga iniciada. Revisa tu carpeta de descargas.</div>
+  </div>
+
+</main>
+
+<footer>
+  Proyecto académico — sin fines comerciales.
+</footer>
+
+<script>
+  const toggleBtn = document.getElementById('toggleTerms');
+  const termsBody = document.getElementById('termsBody');
+  toggleBtn.addEventListener('click', () => {
+    const isOpen = termsBody.classList.toggle('open');
+    toggleBtn.textContent = isOpen ? 'Ocultar términos y condiciones' : 'Leer términos y condiciones';
+  });
+
+  const agreeCheck = document.getElementById('agreeCheck');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const statusMsg = document.getElementById('statusMsg');
+
+  agreeCheck.addEventListener('change', () => {
+    downloadBtn.classList.toggle('enabled', agreeCheck.checked);
+  });
+
+  downloadBtn.addEventListener('click', () => {
+    if (!agreeCheck.checked) return;
+    // Reemplaza este enlace por la URL real de tu archivo .zip cuando lo tengas listo.
+    // window.location.href = "https://tu-enlace-aqui.com/extension.zip";
+    statusMsg.classList.add('show');
+  });
+</script>
+
+</body>
+</html>
